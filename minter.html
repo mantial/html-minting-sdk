@@ -7,6 +7,7 @@
     <title>HTML minting SDK</title> <!-- Change to the title of your app -->
 </head>
 <body>
+  <div>My super page</div>
     <div id="mantial-sdk-app"></div>
     <script>
       /**
@@ -14,13 +15,13 @@
        */
       const config = {
         network: "ropsten", //change to "ethereum" to use on mainnet
-        collectionSlug: "", //change to the name of your collection
+        collectionSlug: "mst-santi", //change to the name of your collection
         amount: "",
-        showTitle: false,
-        amountSelector: false,
+        showTitle: true,
+        amountSelector: true,
         saleSelector: false,
         saleId: "",
-        showDetails: false,
+        showDetails: true,
         showErrors: false,
         theme: "",
         styles: {
@@ -85,13 +86,13 @@
         for (const [key, value] of Object.entries(config)) {
           const isStyleConfig = ["theme", "styles", "texts"].includes(key);
 
-          if (isStyleConfig) {
+          if (isStyleConfig || key === "network" || !value) {
             continue;
           }
-
-          params.set(key, value.toString());
+            params.set(key, value.toString());
         }
 
+        console.log(`${url}/${config.collectionSlug}?${params}`)
         return `${url}/${config.collectionSlug}?${params}`;
       }
 
