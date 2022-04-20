@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML minting SDK</title>
+</head>
+<body>
+    <div id="mantial-sdk-app"></div>
+    <script>
+      /**
+       * Mantial config
+       */
+      const config = {
+        network: "ropsten", //change to "ethereum" to use on mainnet
+        collectionSlug: "",
+        amount: "",
+        showTitle: false,
+        amountSelector: false,
+        saleSelector: false,
+        saleId: "",
+        showDetails: false,
+        showErrors: false,
+        theme: "",
+        styles: {
+            button: "",
+            mintButton: "",
+            switchNetworkButton: "",
+            container: "",
+            title: "",
+            error: "",
+            amount: "",
+            iconButton: "",
+            texts: "",
+            success: "",
+            minting: "",
+            minterContainer: "",
+            description: "",
+            installMetamaskButton: "",
+        },
+        texts: {
+            title: "",
+            minting: "",
+            success: "",
+            buy: "",
+            goBack: "",
+            description: "",
+            switchNetwork: "",
+            installMetamask: "",
+        },
+      };
+
+      const frameId = makeId(10);
+      makeIframe("100%", 500); // set width and height
+
+      function makeIframe(width, height) {
+        const iframe = document.createElement("iframe");
+
+        iframe.setAttribute("id", frameId);
+        iframe.setAttribute("width", width);
+        iframe.setAttribute("height", height);
+        iframe.setAttribute("src", makeUrl());
+
+        const app = document.getElementById("mantial-sdk-app");
+        app.appendChild(iframe);
+
+        iframe.onload = () => {
+          iframe.contentWindow.postMessage(
+            { ...config, type: "mantial-config" },
+            "*"
+          );
+        };
+      }
+
+      function makeUrl() {
+        const productionUrl = "https://minter.mantial.com";
+        const testUrl = "https://dev.minter.mantial.com";
+
+        const url = config.network === "ethereum" ? productionUrl : testUrl;
+
+        const params = new URLSearchParams();
+
+        for (const [key, value] of Object.entries(config)) {
+          const isStyleConfig = ["theme", "styles", "texts"].includes(key);
+
+          if (isStyleConfig) {
+            continue;
+          }
+
+          params.set(key, value.toString());
+        }
+
+        return `${url}/${config.collectionSlug}?${params}`;
+      }
+
+      function makeId(length) {
+        var result = "";
+        var characters =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+          result += characters.charAt(
+            Math.floor(Math.random() * charactersLength)
+          );
+        }
+        return result;
+      }
+    </script>
+  </body>
+</html>
