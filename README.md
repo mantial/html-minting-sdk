@@ -4,7 +4,7 @@ Just copy or download the minter.html file and use it on your application. Be su
 
 ## Mantial configuration
 
-```json
+```
 {
     network: 'ropsten' | 'ethereum',
     collectionSlug: string,
