@@ -61,6 +61,7 @@
         iframe.setAttribute("width", width);
         iframe.setAttribute("height", height);
         iframe.setAttribute("src", makeUrl());
+        iframe.setAttribute("style", "border:none");
 
         const app = document.getElementById("mantial-sdk-app");
         app.appendChild(iframe);
