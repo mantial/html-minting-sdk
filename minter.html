@@ -15,13 +15,13 @@
        */
       const config = {
         network: "ropsten", //change to "ethereum" to use on mainnet
-        collectionSlug: "mst-santi", //change to the name of your collection
+        collectionSlug: "", //change to the name of your collection
         amount: "",
-        showTitle: true,
-        amountSelector: true,
+        showTitle: false,
+        amountSelector: false,
         saleSelector: false,
         saleId: "",
-        showDetails: true,
+        showDetails: false,
         showErrors: false,
         theme: "",
         styles: {
@@ -92,7 +92,6 @@
             params.set(key, value.toString());
         }
 
-        console.log(`${url}/${config.collectionSlug}?${params}`)
         return `${url}/${config.collectionSlug}?${params}`;
       }
 
