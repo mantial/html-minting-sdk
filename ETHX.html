@@ -1,0 +1,95 @@
+<script>
+    const config = {
+      network: "ethereum",
+      collectionSlug: "ETHX",
+      amount: 1,
+      showTitle: true,
+      amountSelector: true,
+      saleSelector: false,
+      saleId: "",
+      showErrors: true,
+      theme: "",
+      styles: {
+          button: "",
+          mintButton: "",
+          switchNetworkButton: "",
+          container: "",
+          title: "",
+          error: "",
+          amount: "",
+          iconButton: "",
+          texts: "",
+          success: "",
+          minting: "",
+          minterContainer: "",
+          description: "",
+          installMetamaskButton: "",
+      },
+      texts: {
+          title: "Mint ETHX",
+          minting: "",
+          success: "",
+          buy: "Mint",
+          goBack: "",
+          description: "",
+          switchNetwork: "",
+          installMetamask: "",
+      },
+    };
+  
+    const frameId = makeId(10);
+    makeIframe("100%", 500); // set width and height
+  
+    function makeIframe(width, height) {
+      const iframe = document.createElement("iframe");
+  
+      iframe.setAttribute("id", frameId);
+      iframe.setAttribute("width", width);
+      iframe.setAttribute("height", height);
+      iframe.setAttribute("src", makeUrl());
+      iframe.setAttribute("style", "border:none");
+  
+      const app = document.getElementById("mantial-sdk-app");
+      app.appendChild(iframe);
+  
+      iframe.onload = () => {
+        iframe.contentWindow.postMessage(
+          { ...config, type: "mantial-config" },
+          "*"
+        );
+      };
+    }
+  
+    function makeUrl() {
+      const productionUrl = "https://minter.mantial.com";
+      const testUrl = "https://dev.minter.mantial.com";
+  
+      const url = config.network === "ethereum" ? productionUrl : testUrl;
+  
+      const params = new URLSearchParams();
+  
+      for (const [key, value] of Object.entries(config)) {
+        const isStyleConfig = ["theme", "styles", "texts"].includes(key);
+  
+        if (isStyleConfig || key === "network" || value === "") {
+          continue;
+        }
+          params.set(key, value.toString());
+      }
+  
+      return `${url}/${config.collectionSlug}?${params}`;
+    }
+  
+    function makeId(length) {
+      var result = "";
+      var characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      var charactersLength = characters.length;
+      for (var i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+      return result;
+    }
+  </script>
