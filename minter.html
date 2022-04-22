@@ -14,7 +14,7 @@
        */
       const config = {
         network: "ropsten", //change to "ethereum" to use on mainnet
-        collectionSlug: "mst-santi", //change to the name of your collection
+        collectionSlug: "", //change to the name of your collection
         amount: "",
         showTitle: false,
         amountSelector: false,
@@ -84,7 +84,7 @@
         for (const [key, value] of Object.entries(config)) {
           const isStyleConfig = ["theme", "styles", "texts"].includes(key);
 
-          if (isStyleConfig || key === "network" || value === "") {
+          if (isStyleConfig || key === "network" || key === "collectionSlug" || value === "") {
             continue;
           }
             params.set(key, value.toString());
