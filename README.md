@@ -17,8 +17,8 @@ Under the hood this use Material-UI to apply styling. Be sure to read documentat
     saleId: string //use this in case you want to create a mint button that works with a particular sale (without the selector) so that it only allows users to mint for a particular sale,
     showDetails: boolean //if you want the user to be able to see details from the operation,
     showErrors: boolean //if you want the user to be able to see the different errors that can occur in the minting process,
-    theme: any, // ---> [MUI v5 theme](https://mui.com/material-ui/customization/theming/),
-    styles: { // ---> [allow inline styles applied as 'sx' to MUI components](https://mui.com/system/the-sx-prop/)
+    theme: any, // ---> MUI v5 theme (https://mui.com/material-ui/customization/theming/),
+    styles: { // ---> allow inline styles applied as 'sx' to MUI components (https://mui.com/system/the-sx-prop/)
         button: any,
         mintButton: any,
         switchNetworkButton: any,
