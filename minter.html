@@ -13,7 +13,7 @@
        * Mantial config
        */
       const config = {
-        network: "ropsten", //change to "ethereum" to use on mainnet
+        network: "demo", //change to "ethereum" to use on mainnet
         collectionSlug: "", //change to the name of your collection
         amount: "",
         showTitle: false,
@@ -75,9 +75,9 @@
       function makeUrl() {
         const productionUrl = "https://minter.mantial.com";
         const testUrl = "https://dev.minter.mantial.com";
+        const demoUrl = "https://demo.minter.mantial.com/"
 
-        const url = config.network === "ethereum" ? productionUrl : testUrl;
-
+        const url = config.network === "ethereum" ? productionUrl : config.network === "demo" ? demoUrl :  testUrl;
         const params = new URLSearchParams();
 
         for (const [key, value] of Object.entries(config)) {
